@@ -4,9 +4,9 @@
 # ============================================================
 backend:
   name: github
-  repo: your-github-id/seojeong-rp     # ← 변경
+  repo: seojungrpc/seojung-church
   branch: main
-  base_url: https://your-oauth-worker.workers.dev   # ← 변경
+  base_url: https://sveltia-cms-auth.seojungrpc.workers.dev
 
 locale: ko
 media_folder: public/images

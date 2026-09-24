@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Slideshow from '../components/Slideshow.astro';
+import LiveWorship from '../components/LiveWorship.astro';
+import SermonCard from '../components/SermonCard.astro';
+import settings from '../data/settings.json';
+
+const sermons = (await getCollection('sermons', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
+
+const cards = [
+  { href: '/about', title: '소개', body: '아직 조직된 교회는 아니지만, 성경적인 교회를 세우기를 소망하며 온 가족이 함께 모입니다.' },
+  { href: '/beliefs', title: '신앙고백', body: '성경과 개혁신학의 유산, 웨스트민스터 신앙고백서·대소요리문답을 공적 신앙고백으로 삼습니다.' },
+  { href: '/worship', title: '예배', body: '하나님께서 정하신 요소로 드리는, 단순하고 이해하기 쉬운 예배를 드립니다.' },
+];
+---
+<BaseLayout>
+  <Slideshow>
+    <div class="hero-text">
+      <p class="hero-eyebrow">{settings.tagline}</p>
+      <h1>{settings.churchName}</h1>
+      <p class="hero-verse">“오라 우리가 여호와께 노래하며 우리의 구원의 반석을 향하여 즐거이 외치자” — 시편 95:1</p>
+      <p class="hero-when">{settings.worshipTime}에 함께 예배드립니다 · 고양시 일산동구</p>
+      <div class="hero-cta">
+        <a class="btn btn--gold" href="/worship">예배 안내</a>
+        <a class="btn btn--on-dark" href={settings.youtubeChannelUrl} target="_blank" rel="noopener">유튜브 채널</a>
+      </div>
+    </div>
+  </Slideshow>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">주일예배 생중계</p>
+      <h2>함께 드리는 주일예배</h2>
+      <LiveWorship />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-3">
+        {cards.map((c) => (
+          <a class="card" href={c.href}><h3>{c.title}</h3><p>{c.body}</p><span class="more">자세히 →</span></a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="head-row"><h2>최근 설교</h2><a href="/sermons">전체 보기 →</a></div>
+      {sermons.length ? (
+        <div class="grid-3">
+          {sermons.map((s) => (
+            <SermonCard title={s.data.title} date={s.data.date} scripture={s.data.scripture}
+              preacher={s.data.preacher} youtube={s.data.youtube} summary={s.data.summary} href={`/sermons/${s.slug}`} />
+          ))}
+        </div>
+      ) : <p class="lede">등록된 설교가 아직 없습니다.</p>}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero-text { color: #fff; max-width: 42rem; padding: 2rem 0; }
+  .hero-eyebrow { font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-soft); font-weight: 700; margin: 0 0 .6rem; }
+  .hero-text h1 { color: #fff; font-size: clamp(2.2rem, 5vw, 3.2rem); margin: 0 0 1rem; }
+  .hero-verse { font-family: var(--serif); font-size: 1.1rem; color: rgba(255,255,255,.9); margin: 0 0 .8rem; }
+  .hero-when { color: rgba(255,255,255,.8); margin: 0 0 1.5rem; }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: .7rem; }
+</style>

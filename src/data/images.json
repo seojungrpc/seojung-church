@@ -1,0 +1,12 @@
+{
+  "homeSlides": [],
+  "pages": {
+    "about":     { "hero": "", "gallery": [] },
+    "beliefs":   { "hero": "", "gallery": [] },
+    "worship":   { "hero": "", "gallery": [] },
+    "sermons":   { "hero": "", "gallery": [] },
+    "news":      { "hero": "", "gallery": [] },
+    "resources": { "hero": "", "gallery": [] },
+    "visit":     { "hero": "", "gallery": [] }
+  }
+}

@@ -1,0 +1,136 @@
+# ============================================================
+# Sveltia CMS 설정
+# 1) repo → 본인 GitHub 저장소  2) base_url → OAuth Worker 주소 (README 참고)
+# ============================================================
+backend:
+  name: github
+  repo: your-github-id/seojeong-rp     # ← 변경
+  branch: main
+  base_url: https://your-oauth-worker.workers.dev   # ← 변경
+
+locale: ko
+media_folder: public/images
+public_folder: /images
+
+collections:
+  # ---------- 설교 ----------
+  - name: sermons
+    label: 설교
+    label_singular: 설교
+    folder: src/content/sermons
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { name: title, label: 제목, widget: string }
+      - { name: date, label: 날짜, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { name: scripture, label: 본문 성경, widget: string, required: false }
+      - { name: preacher, label: 설교자, widget: string, required: false, default: "서학량 목사" }
+      - { name: youtube, label: 유튜브 링크, widget: string, required: false, hint: "유튜브 영상 주소 전체를 붙여넣으세요" }
+      - { name: summary, label: 한 줄 요약, widget: string, required: false }
+      - { name: draft, label: 비공개(임시저장), widget: boolean, default: false }
+      - { name: body, label: 설교 노트, widget: markdown, required: false }
+
+  # ---------- 소식·글 ----------
+  - name: news
+    label: 소식·글
+    label_singular: 글
+    folder: src/content/news
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { name: title, label: 제목, widget: string }
+      - { name: date, label: 날짜, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { name: summary, label: 한 줄 요약, widget: string, required: false }
+      - { name: draft, label: 비공개(임시저장), widget: boolean, default: false }
+      - { name: body, label: 본문, widget: markdown }
+
+  # ---------- 사진 (메인 슬라이드 + 페이지별) ----------
+  - name: gallery
+    label: 사진
+    files:
+      - name: images
+        label: 사진 관리
+        file: src/data/images.json
+        fields:
+          - name: homeSlides
+            label: 메인 슬라이드 (홈 상단)
+            widget: list
+            required: false
+            summary: "{{fields.caption}}"
+            fields:
+              - { name: image, label: 사진, widget: image }
+              - { name: alt, label: 설명(대체텍스트), widget: string, required: false }
+              - { name: caption, label: 캡션(선택), widget: string, required: false }
+          - name: pages
+            label: 페이지별 사진
+            widget: object
+            fields:
+              - name: about
+                label: 소개
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: hero, label: 상단 배너 사진, widget: image, required: false }
+                  - { name: gallery, label: 갤러리, widget: list, required: false, field: { name: image, label: 사진, widget: image } }
+              - name: beliefs
+                label: 신앙고백
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: hero, label: 상단 배너 사진, widget: image, required: false }
+                  - { name: gallery, label: 갤러리, widget: list, required: false, field: { name: image, label: 사진, widget: image } }
+              - name: worship
+                label: 예배
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: hero, label: 상단 배너 사진, widget: image, required: false }
+                  - { name: gallery, label: 갤러리, widget: list, required: false, field: { name: image, label: 사진, widget: image } }
+              - name: sermons
+                label: 설교
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: hero, label: 상단 배너 사진, widget: image, required: false }
+                  - { name: gallery, label: 갤러리, widget: list, required: false, field: { name: image, label: 사진, widget: image } }
+              - name: news
+                label: 소식
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: hero, label: 상단 배너 사진, widget: image, required: false }
+                  - { name: gallery, label: 갤러리, widget: list, required: false, field: { name: image, label: 사진, widget: image } }
+              - name: resources
+                label: 자료
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: hero, label: 상단 배너 사진, widget: image, required: false }
+                  - { name: gallery, label: 갤러리, widget: list, required: false, field: { name: image, label: 사진, widget: image } }
+              - name: visit
+                label: 오시는 길
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: hero, label: 상단 배너 사진, widget: image, required: false }
+                  - { name: gallery, label: 갤러리, widget: list, required: false, field: { name: image, label: 사진, widget: image } }
+
+  # ---------- 사이트 설정 ----------
+  - name: settings
+    label: 사이트 설정
+    files:
+      - name: general
+        label: 기본 정보
+        file: src/data/settings.json
+        fields:
+          - { name: churchName, label: 교회 이름, widget: string }
+          - { name: churchNameEn, label: 영문 이름, widget: string, required: false }
+          - { name: tagline, label: 소개 문구, widget: string, required: false }
+          - { name: worshipTime, label: 예배 시간, widget: string }
+          - { name: address, label: 주소, widget: string, required: false }
+          - { name: mapEmbedUrl, label: 구글지도 임베드 URL, widget: string, required: false }
+          - { name: youtubeChannelId, label: 유튜브 채널 ID, widget: string, required: false, hint: "라이브 자동연결용. UC로 시작" }
+          - { name: youtubeChannelUrl, label: 유튜브 채널 주소, widget: string, required: false }
+          - { name: instagramUrl, label: 인스타그램 주소, widget: string, required: false }
+          - { name: contactEmail, label: 이메일, widget: string, required: false }
+          - { name: phone, label: 전화번호, widget: string, required: false }

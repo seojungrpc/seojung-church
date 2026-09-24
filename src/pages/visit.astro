@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Gallery from '../components/Gallery.astro';
+import { pageImages } from '../utils/images';
+import settings from '../data/settings.json';
+const { hero, gallery } = pageImages('visit');
+---
+<BaseLayout title="오시는 길">
+  <PageHero image={hero} alt="오시는 길" />
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">오시는 길 · 연락</p>
+      <h1>함께 예배드립니다</h1>
+      <div class="visit">
+        <div>
+          <h2>모임 시간</h2>
+          <ul class="schedule list-reset">
+            <li><span>주일 오전예배</span><span class="t">오전 11:00</span></li>
+            <li><span>어린이 모임</span><span class="t">오후 1:00</span></li>
+            <li><span>어른 주일학교</span><span class="t">오후 2:00</span></li>
+          </ul>
+          <h2>장소</h2>
+          <p>{settings.address}</p>
+          {settings.phone && <p class="meta">{settings.phone}</p>}
+          {settings.contactEmail && <p class="meta">{settings.contactEmail}</p>}
+          <h2>연결</h2>
+          <ul class="list-reset">
+            {settings.youtubeChannelUrl && <li><a href={settings.youtubeChannelUrl} target="_blank" rel="noopener">유튜브 채널</a></li>}
+            {settings.instagramUrl && <li><a href={settings.instagramUrl} target="_blank" rel="noopener">목사님 인스타그램</a></li>}
+          </ul>
+        </div>
+        <div>
+          {settings.mapEmbedUrl ? (
+            <div class="embed" style="aspect-ratio:4/3"><iframe src={settings.mapEmbedUrl} title="지도" loading="lazy" allowfullscreen></iframe></div>
+          ) : (
+            <div class="embed" style="aspect-ratio:4/3"><div class="embed__placeholder">관리자 화면 → 사이트 설정 → 구글지도 임베드 URL을 입력하면 지도가 표시됩니다.</div></div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+  <Gallery images={gallery} />
+</BaseLayout>
+<style>
+  .visit { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.4rem; }
+  .visit h2 { margin-top: 1.5rem; }
+  .schedule li { display: flex; justify-content: space-between; padding: .55rem 0; border-bottom: 1px dashed var(--line); max-width: 24rem; }
+  .schedule .t { color: var(--gold); font-weight: 700; }
+  @media (max-width: 760px) { .visit { grid-template-columns: 1fr; } }
+</style>

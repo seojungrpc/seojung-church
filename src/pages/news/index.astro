@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Gallery from '../../components/Gallery.astro';
+import { pageImages } from '../../utils/images';
+const { hero, gallery } = pageImages('news');
+const posts = (await getCollection('news', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<BaseLayout title="소식">
+  <PageHero image={hero} alt="소식" />
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">소식 · 글</p>
+      <h1 style="margin-bottom:1.4rem">소식</h1>
+      {posts.length ? (
+        <ul class="list-reset" style="max-width:44rem">
+          {posts.map((p) => (
+            <li style="padding:1.3rem 0;border-top:1px solid var(--line)">
+              <a href={`/news/${p.slug}`} style="color:inherit;display:block">
+                <p class="meta" style="margin:0 0 .2rem">{p.data.date.toISOString().slice(0,10)}</p>
+                <h3 style="margin:.15rem 0 .35rem">{p.data.title}</h3>
+                {p.data.summary && <p style="color:var(--muted);margin:0;font-size:.95rem">{p.data.summary}</p>}
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : <p class="lede">등록된 글이 아직 없습니다.</p>}
+    </div>
+  </section>
+  <Gallery images={gallery} />
+</BaseLayout>

@@ -1,0 +1,24 @@
+---
+interface Props { images?: string[]; title?: string; }
+const { images = [], title } = Astro.props;
+---
+{images.length > 0 && (
+  <section class="section">
+    <div class="container">
+      {title && <p class="eyebrow">{title}</p>}
+      <div class="gallery">
+        {images.map((src) => (
+          <a class="gallery__item" href={src} target="_blank" rel="noopener">
+            <img src={src} alt="" loading="lazy" />
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+<style>
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); gap: .8rem; }
+  .gallery__item { display: block; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); }
+  .gallery__item img { width: 100%; aspect-ratio: 4/3; object-fit: cover; transition: transform .3s; }
+  .gallery__item:hover img { transform: scale(1.04); }
+</style>

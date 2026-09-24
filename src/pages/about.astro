@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Gallery from '../components/Gallery.astro';
+import { pageImages } from '../utils/images';
+import settings from '../data/settings.json';
+const { hero, gallery } = pageImages('about');
+---
+<BaseLayout title="소개">
+  <PageHero image={hero} alt="서정교회" />
+  <section class="section">
+    <div class="container prose">
+      <p class="eyebrow">소개</p>
+      <h1>서정교회 개척 모임</h1>
+
+      <h2>모임</h2>
+      <p>우리는 성경적인 교회를 세우기를 소망하지만 아직 조직된 교회는 아닙니다. 따라서 현재는 성경적인 교회의 개혁과 장차 교회의 조직을 준비하는 개척 모임으로서 매주 함께 모여 하나님을 예배하고, 성경을 배우며, 교제를 나누고 있습니다.</p>
+
+      <h2>가정, 부모, 자녀를 세우는 모임</h2>
+      <p>우리는 하나님께서 자녀의 신앙교육을 일차적으로 부모에게 맡기셨다고 믿습니다. 그래서 무엇보다 부모가 먼저 말씀 안에서 자라가도록 서로를 격려합니다. 믿음 안에서 세워진 가정은 자녀들에게 평생 다시 돌아올 수 있는 신앙의 따뜻한 고향이 되어 주며, 자신의 믿음을 돌아보고 점검할 수 있는 든든한 기준이 되어 줍니다. 부모가 말씀 안에서 성숙해 갈수록 자녀들 역시 하나님의 말씀을 더욱 진지하게 배우고 사랑하게 될 것입니다. 이러한 믿음 아래 우리는 자녀들을 공예배에서 분리하지 않고, 온 가족이 한자리에 모여 함께 하나님을 예배합니다.</p>
+
+      <h2>성장하기에 안전한 공동체</h2>
+      <p>우리 모두는 완벽하지 않고, 여전히 성장하는 사람들입니다. 그래서 우리는 교회의 본질적이고 기초적인 것들을 무엇보다 중요하게 여깁니다. 또한 오랜 역사 속에서 성경과 신학, 그리고 실제 교회의 삶을 통해 검증되어 온 역사적 개혁장로교회의 신앙과 실천을 함께 배우고 나누고자 합니다. 우리는 하나님께서 평범한 은혜의 방편을 통해 자신의 백성을 자라게 하신다고 믿습니다. 그러므로 우리의 모임은 그리스도인으로서 건강하고 꾸준하게 성장하기를 원하는 모든 이들에게 안전하고 든든한 공동체가 되기를 소망합니다.</p>
+
+      <h2>리더십</h2>
+      <div class="leader">
+        <div class="leader__photo"><img src="/images/pastor.jpg" alt="서학량 목사" /></div>
+        <div>
+          <p class="leader__role">담임목사 · Teaching Elder</p>
+          <h3 class="leader__name">서학량 <span>Hakryang Seo</span></h3>
+          <p>서정교회 개척 모임을 섬기며, 하나님께서 성경에서 명하신 예배와 역사적 개혁장로교회의 신앙을 가르치고 있습니다.</p>
+          <div class="cv">
+            <h4>학력</h4>
+            <ul>
+              <li>고려대학교 생명공학과 (B.A.)</li>
+              <li>고려신학대학교 대학원 (M.Div.)</li>
+              <li>Calvin Theological Seminary (Th.M.)</li>
+              <li>Puritan Reformed Theological Seminary (Ph.D.)</li>
+            </ul>
+            <h4>저서</h4>
+            <ul>
+              <li>Seo, Hakryang. <em>Episcopalian or Presbyterian? Cornelius Burgess (1589?–1665) on Church Government.</em> <span class="pub">Reformed Historical Theology 86. Göttingen: Vandenhoeck &amp; Ruprecht, 2026.</span></li>
+            </ul>
+            <h4>역서</h4>
+            <ul>
+              <li>Gillespie, George. <em>CXI Propositions Concerning the Ministry and Government of the Church.</em> <span class="pub">Korean trans. Hakryang Seo. 젠틀레인.</span></li>
+              <li>Gribben, Crawford. <em>An Introduction to John Owen: A Christian Vision for Every Stage of Life.</em> <span class="pub">Korean trans. Hakryang Seo. 다함.</span></li>
+              <li>Girardeau, John L. <em>Instrumental Music in the Public Worship of the Church.</em> <span class="pub">공역 Hakryang Seo · Jaewoon Jung. 페스티나렌테.</span></li>
+            </ul>
+          </div>
+          {settings.instagramUrl && <p class="links"><a href={settings.instagramUrl} target="_blank" rel="noopener">인스타그램 @teaching_elder_seo</a></p>}
+        </div>
+      </div>
+
+      <p style="margin-top:2.2rem"><a class="btn" href="/beliefs">우리의 신앙고백 보기 →</a></p>
+    </div>
+  </section>
+  <Gallery images={gallery} title="함께한 순간들" />
+</BaseLayout>
+
+<style>
+  .leader { display: grid; grid-template-columns: 9rem 1fr; gap: 1.4rem; align-items: start; margin-top: .6rem; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 1.4rem; }
+  .leader__photo { aspect-ratio: 3/4; border-radius: 10px; overflow: hidden; background: #e9e6df; }
+  .leader__photo img { width: 100%; height: 100%; object-fit: cover; }
+  .leader__role { color: var(--gold); font-weight: 700; font-size: .85rem; letter-spacing: .04em; margin: 0 0 .15rem; }
+  .leader__name { margin: 0 0 .5rem; font-size: 1.35rem; }
+  .leader__name span { font-family: var(--sans); font-weight: 500; font-size: .9rem; color: var(--muted); }
+  .cv { margin: .9rem 0 0; }
+  .cv h4 { font-family: var(--sans); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin: 0 0 .3rem; }
+  .cv ul { list-style: none; padding: 0; margin: 0 0 .7rem; }
+  .cv li { font-size: .95rem; color: var(--ink-soft); padding: .12rem 0; }
+  .cv li .pub { color: var(--muted); font-size: .88rem; }
+  .links { margin-top: .9rem; }
+  @media (max-width: 640px) { .leader { grid-template-columns: 1fr; } .leader__photo { max-width: 11rem; } }
+</style>

@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Gallery from '../components/Gallery.astro';
+import { pageImages } from '../utils/images';
+import { resourceGroups } from '../data/resources';
+const { hero, gallery } = pageImages('resources');
+---
+<BaseLayout title="자료">
+  <PageHero image={hero} alt="자료" />
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">자료</p>
+      <h1>RP 계열 · 참고 자료</h1>
+      <p class="lede">개혁장로교회와 관련된 교단·기관·예배 자료 링크입니다.</p>
+      <div class="res">
+        {resourceGroups.map((g) => (
+          <section class="res-group">
+            <h3>{g.title}</h3>
+            {g.note && <p class="meta">{g.note}</p>}
+            {g.links.length > 0 && (
+              <ul class="list-reset">
+                {g.links.map((l) => (
+                  <li style="padding:.32rem 0"><a href={l.url} target="_blank" rel="noopener">{l.name}</a>{l.desc && <span class="rd"> — {l.desc}</span>}</li>
+                ))}
+              </ul>
+            )}
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
+  <Gallery images={gallery} />
+</BaseLayout>
+<style>
+  .res { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 2rem; margin-top: 1.8rem; }
+  .res-group h3 { font-family: var(--serif); }
+  .rd { color: var(--muted); font-size: .85rem; }
+</style>

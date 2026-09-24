@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { youtubeId } from '../../utils/youtube';
+
+export async function getStaticPaths() {
+  const sermons = await getCollection('sermons', ({ data }) => !data.draft);
+  return sermons.map((s) => ({ params: { slug: s.slug }, props: { sermon: s } }));
+}
+const { sermon } = Astro.props;
+const { Content } = await sermon.render();
+const { title, date, scripture, preacher, youtube } = sermon.data;
+const id = youtubeId(youtube);
+const dateStr = date.toISOString().slice(0, 10);
+---
+<BaseLayout title={title}>
+  <section class="section">
+    <div class="container prose">
+      <p class="meta"><a href="/sermons">← 설교 목록</a></p>
+      <h1>{title}</h1>
+      <p class="meta">{dateStr}{scripture ? ` · ${scripture}` : ''}{preacher ? ` · ${preacher}` : ''}</p>
+
+      <div class="embed">
+        {id ? (
+          <iframe
+            src={`https://www.youtube.com/embed/${id}`}
+            title={title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        ) : (
+          <div class="embed__placeholder">영상 준비 중입니다.</div>
+        )}
+      </div>
+
+      <div class="sermon-body">
+        <Content />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .prose { max-width: 46rem; }
+  .sermon-body { margin-top: 1.75rem; }
+</style>

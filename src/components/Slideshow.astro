@@ -1,0 +1,80 @@
+---
+import { homeSlides } from '../utils/images';
+const slides = homeSlides;
+const hasSlides = slides.length > 0;
+---
+<section class="hero-slides" data-slideshow>
+  <div class="hero-slides__track">
+    {hasSlides
+      ? slides.map((s, i) => (
+          <div class:list={["slide", { "is-active": i === 0 }]} data-slide>
+            <img src={s.image} alt={s.alt || ""} loading={i === 0 ? "eager" : "lazy"} />
+            {s.caption && <p class="slide__caption">{s.caption}</p>}
+          </div>
+        ))
+      : <div class="slide is-active slide--solid"></div>
+    }
+  </div>
+  <div class="hero-slides__overlay"></div>
+  <div class="hero-slides__content">
+    <div class="container"><slot /></div>
+  </div>
+  {slides.length > 1 && (
+    <>
+      <button class="hero-slides__arrow prev" data-prev aria-label="이전 사진">‹</button>
+      <button class="hero-slides__arrow next" data-next aria-label="다음 사진">›</button>
+      <div class="hero-slides__dots" data-dots>
+        {slides.map((_, i) => (
+          <button class:list={["dot", { "is-active": i === 0 }]} data-dot={i} aria-label={`${i + 1}번 사진`}></button>
+        ))}
+      </div>
+    </>
+  )}
+</section>
+
+<style>
+  .hero-slides { position: relative; overflow: hidden; background: var(--ink); }
+  .hero-slides__track, .slide { position: relative; }
+  .slide { display: none; }
+  .slide.is-active { display: block; }
+  .slide img { width: 100%; height: clamp(24rem, 62vh, 40rem); object-fit: cover; }
+  .slide--solid { height: clamp(20rem, 46vh, 30rem); background:
+      radial-gradient(120% 120% at 20% 10%, #23324f 0%, #131d31 70%); }
+  .slide__caption { position: absolute; bottom: .6rem; right: 1rem; margin: 0; color: rgba(255,255,255,.85); font-size: .8rem; }
+  .hero-slides__overlay { position: absolute; inset: 0; background:
+      linear-gradient(90deg, rgba(19,29,49,.82) 0%, rgba(19,29,49,.55) 45%, rgba(19,29,49,.25) 100%); }
+  .hero-slides__content { position: absolute; inset: 0; display: flex; align-items: center; }
+  .hero-slides__arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+    background: rgba(255,255,255,.15); color: #fff; border: 0; width: 2.6rem; height: 2.6rem; border-radius: 50%;
+    font-size: 1.6rem; line-height: 1; cursor: pointer; }
+  .hero-slides__arrow:hover { background: rgba(255,255,255,.3); }
+  .hero-slides__arrow.prev { left: 1rem; } .hero-slides__arrow.next { right: 1rem; }
+  .hero-slides__dots { position: absolute; bottom: 1rem; left: 0; right: 0; z-index: 3; display: flex; gap: .5rem; justify-content: center; }
+  .dot { width: .55rem; height: .55rem; border-radius: 50%; border: 0; background: rgba(255,255,255,.45); cursor: pointer; padding: 0; }
+  .dot.is-active { background: var(--gold-soft); }
+  @media (max-width: 640px) { .hero-slides__arrow { display: none; } }
+</style>
+
+<script>
+  document.querySelectorAll('[data-slideshow]').forEach((root) => {
+    const slides = Array.from(root.querySelectorAll('[data-slide]'));
+    if (slides.length < 2) return;
+    const dots = Array.from(root.querySelectorAll('[data-dot]'));
+    let i = 0, timer;
+    const show = (n) => {
+      i = (n + slides.length) % slides.length;
+      slides.forEach((s, k) => s.classList.toggle('is-active', k === i));
+      dots.forEach((d, k) => d.classList.toggle('is-active', k === i));
+    };
+    const next = () => show(i + 1), prev = () => show(i - 1);
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const start = () => { if (!reduce) timer = setInterval(next, 5500); };
+    const stop = () => clearInterval(timer);
+    root.querySelector('[data-next]')?.addEventListener('click', () => { next(); stop(); start(); });
+    root.querySelector('[data-prev]')?.addEventListener('click', () => { prev(); stop(); start(); });
+    dots.forEach((d) => d.addEventListener('click', () => { show(Number(d.dataset.dot)); stop(); start(); }));
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    start();
+  });
+</script>

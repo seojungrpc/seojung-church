@@ -1,0 +1,18 @@
+---
+import settings from '../data/settings.json';
+const channelId = settings.youtubeChannelId?.trim();
+const liveSrc = channelId ? `https://www.youtube.com/embed/live_stream?channel=${channelId}` : null;
+---
+<div class="live">
+  <div class="embed">
+    {liveSrc ? (
+      <iframe src={liveSrc} title="주일예배 생중계"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    ) : (
+      <div class="embed__placeholder">주일예배 시간에 이 자리에서 유튜브 라이브가 자동으로 재생됩니다.</div>
+    )}
+  </div>
+  {settings.youtubeChannelUrl && (
+    <p style="margin:1rem 0 0"><a class="btn btn--gold" href={settings.youtubeChannelUrl} target="_blank" rel="noopener">유튜브에서 시청</a></p>
+  )}
+</div>

@@ -1,0 +1,15 @@
+---
+interface Props { image?: string; alt?: string; }
+const { image, alt = "" } = Astro.props;
+---
+{image && (
+  <div class="page-hero">
+    <img src={image} alt={alt} />
+    <div class="page-hero__overlay"></div>
+  </div>
+)}
+<style>
+  .page-hero { position: relative; height: clamp(12rem, 30vh, 20rem); overflow: hidden; background: var(--ink); }
+  .page-hero img { width: 100%; height: 100%; object-fit: cover; }
+  .page-hero__overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(19,29,49,.25), rgba(19,29,49,.55)); }
+</style>

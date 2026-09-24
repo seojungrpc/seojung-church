@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Gallery from '../../components/Gallery.astro';
+import SermonCard from '../../components/SermonCard.astro';
+import { pageImages } from '../../utils/images';
+const { hero, gallery } = pageImages('sermons');
+const sermons = (await getCollection('sermons', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<BaseLayout title="설교">
+  <PageHero image={hero} alt="설교" />
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">설교</p>
+      <h1 style="margin-bottom:1.4rem">설교 말씀</h1>
+      {sermons.length ? (
+        <div class="grid-3">
+          {sermons.map((s) => (
+            <SermonCard title={s.data.title} date={s.data.date} scripture={s.data.scripture}
+              preacher={s.data.preacher} youtube={s.data.youtube} summary={s.data.summary} href={`/sermons/${s.slug}`} />
+          ))}
+        </div>
+      ) : <p class="lede">등록된 설교가 아직 없습니다.</p>}
+    </div>
+  </section>
+  <Gallery images={gallery} />
+</BaseLayout>

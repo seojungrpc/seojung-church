@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('news', ({ data }) => !data.draft);
+  return posts.map((p) => ({ params: { slug: p.slug }, props: { post: p } }));
+}
+const { post } = Astro.props;
+const { Content } = await post.render();
+const { title, date } = post.data;
+---
+<BaseLayout title={title}>
+  <section class="section">
+    <div class="container prose">
+      <p class="meta"><a href="/news">← 소식 목록</a></p>
+      <h1>{title}</h1>
+      <p class="meta">{date.toISOString().slice(0, 10)}</p>
+      <div class="news-body"><Content /></div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .prose { max-width: 44rem; }
+  .news-body { margin-top: 1.5rem; }
+</style>

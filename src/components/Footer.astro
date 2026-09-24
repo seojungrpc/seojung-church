@@ -1,0 +1,28 @@
+---
+import settings from '../data/settings.json';
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot">
+      <div>
+        <p class="name">{settings.churchName}</p>
+        <p class="fmeta">{settings.worshipTime}{settings.address ? ` · ${settings.address}` : ''}</p>
+        <p class="fmeta">{settings.tagline}</p>
+        {settings.contactEmail && <p class="fmeta">{settings.contactEmail}</p>}
+      </div>
+      <ul class="list-reset social">
+        {settings.youtubeChannelUrl && <li><a href={settings.youtubeChannelUrl}>YouTube</a></li>}
+        {settings.instagramUrl && <li><a href={settings.instagramUrl}>Instagram</a></li>}
+      </ul>
+    </div>
+    <p class="copy">© {new Date().getFullYear()} {settings.churchNameEn || settings.churchName}</p>
+  </div>
+</footer>
+<style>
+  .site-footer { border-top: 3px solid var(--ink); padding: 2.6rem 0 3.2rem; margin-top: 1rem; }
+  .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.2rem 2rem; }
+  .name { font-family: var(--serif); font-weight: 700; margin: 0 0 .3rem; }
+  .fmeta { color: var(--muted); font-size: .9rem; margin: 0 0 .2rem; }
+  .social { display: flex; gap: 1.1rem; }
+  .copy { color: var(--muted); font-size: .82rem; margin-top: 1.6rem; }
+</style>

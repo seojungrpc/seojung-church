@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Gallery from '../components/Gallery.astro';
+import { pageImages } from '../utils/images';
+import settings from '../data/settings.json';
+const { hero, gallery } = pageImages('worship');
+const order = [
+  { t: '예배로의 부름', v: '“오라 우리가 여호와께 노래하며…” 시편 95:1', b: '예배는 사람이 하나님을 찾아가는 시간이 아니라, 하나님께서 자신의 백성을 불러 모으시는 시간입니다. 우리는 성경 말씀으로 예배를 시작합니다.' },
+  { t: '성경봉독', v: '“읽는 것과 권하는 것과 가르치는 것에 전념하라” 디모데전서 4:13', b: '하나님의 말씀은 그 자체로 하나님의 말씀이므로 회중 앞에서 공적으로 읽혀져야 합니다.' },
+  { t: '찬송', v: '“시와 찬송과 신령한 노래를 부르며 감사하는 마음으로 하나님을 찬양하고” 골로새서 3:16', b: '우리는 하나님께서 친히 우리에게 찬송의 말씀을 주셨다고 믿습니다. 시편은 성령께서 교회의 찬송을 위하여 기록하신 하나님의 말씀입니다. 그러므로 우리는 우리의 목소리로 공예배에서 시편 150편을 함께 부릅니다. 회중 전체가 함께 하나님을 찬양하는 것이 공예배의 목적이므로, 누구나 함께 부를 수 있는 단정하고 품위 있는 곡조를 사용합니다.' },
+  { t: '설교', v: '“너는 말씀을 전파하라…” 디모데후서 4:1-2', b: '하나님께서는 말씀의 선포를 통하여 백성을 가르치고 권면하며 위로하시고 믿음을 자라게 하십니다. 그러므로 목사는 말씀을 바르게 해석하고 충실히 선포하기 위하여 기도하며 연구합니다.' },
+  { t: '공적 기도', v: '“모든 사람을 위하여 간구와 기도와 도고와 감사를 하되” 디모데전서 2:1', b: '목사가 회중을 대표하여 기도하며, 회중은 한 마음으로 회개하고 감사하며 간구합니다.' },
+  { t: '헌금', v: '“매주 첫날에 너희 각 사람이 수입에 따라 모아 두어서” 고린도전서 16:1-2', b: '모든 것이 하나님께로부터 왔음을 인정하며 감사함으로 드리며, 복음 사역과 교회의 필요를 위해 사용됩니다.' },
+  { t: '강복', v: '“주 예수 그리스도의 은혜와…” 고린도후서 13:13', b: '목사는 하나님의 이름으로 회중에게 강복을 선언하며, 하나님의 백성은 은혜와 평강 가운데 각자의 삶의 자리로 나아갑니다.' },
+];
+---
+<BaseLayout title="예배">
+  <PageHero image={hero} alt="예배" />
+  <section class="section">
+    <div class="container prose">
+      <p class="eyebrow">예배 소개</p>
+      <h1>함께 드리는 예배</h1>
+      <p class="lede">공적으로 함께 드리는 예배는 {settings.worshipTime}에 시작됩니다.</p>
+      <h2>하나님께서 정하신 예배</h2>
+      <p>우리는 하나님께서 예배를 받으시는 분이시므로, 예배의 내용과 방식 역시 하나님께서 말씀으로 가르쳐 주셔야 한다고 믿습니다. 따라서 교회는 사람의 생각이나 문화, 전통이나 취향에 따라 새로운 예배의 요소를 만들어 더할 권한이 없습니다. 하나님께서 성경에서 명하신 요소들로 드리는 예배가 하나님께서 가장 기뻐하시는 예배이며, 그러한 예배는 자연스럽게 경건하고 단순한 모습을 갖게 됩니다.</p>
+      <h2>예배의 순서</h2>
+      <ol class="order">
+        {order.map((e, i) => (
+          <li><span class="n">{i + 1}</span><div><h3>{e.t}</h3><p class="v">{e.v}</p><p>{e.b}</p></div></li>
+        ))}
+      </ol>
+      <h2>단순하고 이해하기 쉬운 예배</h2>
+      <p>우리의 예배는 처음 참석하는 분들도 쉽게 따라올 수 있을 만큼 단순합니다. 복잡한 순서보다 하나님께서 성경에서 명하신 예배의 요소들에 집중함으로써, 하나님께 영광을 돌리고 성도들의 믿음을 세우기를 소망합니다.</p>
+    </div>
+  </section>
+  <Gallery images={gallery} />
+</BaseLayout>
+<style>
+  .order { list-style: none; padding: 0; margin: 1rem 0 0; }
+  .order li { padding: 1.3rem 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 2.2rem 1fr; gap: 1rem; }
+  .order .n { font-family: var(--serif); color: var(--gold); font-size: 1.1rem; }
+  .order .v { color: var(--muted); font-style: italic; font-size: .92rem; margin: 0 0 .4rem; }
+</style>

@@ -1,9 +1,9 @@
 {
-  "enabled": false,
-  "title": "",
-  "body": "",
-  "image": "",
-  "buttonLabel": "",
-  "buttonUrl": "",
+  "enabled": true,
+  "title": "테스트",
+  "body": "테스트",
+  "image": "/images/blue_banner_copy_2.jpg",
+  "buttonLabel": "테스트",
+  "buttonUrl": "https://seojungrpc.com/news/2025-01-01-welcome/",
   "dismissForToday": true
 }

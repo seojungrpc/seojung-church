@@ -1,6 +1,7 @@
 ---
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import Popup from '../components/Popup.astro';
 import settings from '../data/settings.json';
 import '../styles/global.css';
 
@@ -30,5 +31,6 @@ const desc = description ?? settings.tagline;
       <slot />
     </main>
     <Footer />
+    <Popup />
   </body>
 </html>

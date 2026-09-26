@@ -1,0 +1,70 @@
+---
+import popup from '../data/popup.json';
+const p = popup as any;
+const show = p.enabled && (p.title || p.body || p.image);
+const sig = show ? encodeURIComponent((p.title || '') + '|' + (p.buttonUrl || '') + '|' + (p.image || '')) : '';
+---
+{show && (
+  <div class="popup" data-popup data-sig={sig} hidden>
+    <div class="popup__overlay" data-close></div>
+    <div class="popup__card" role="dialog" aria-modal="true" aria-label={p.title || '공지'}>
+      <button class="popup__x" data-close aria-label="닫기">×</button>
+      {p.image && <img class="popup__img" src={p.image} alt={p.title || ''} />}
+      <div class="popup__body">
+        {p.title && <h2 class="popup__title">{p.title}</h2>}
+        {p.body && <p class="popup__text">{p.body}</p>}
+        <div class="popup__actions">
+          {p.buttonUrl && p.buttonLabel && (
+            <a class="btn btn--gold" href={p.buttonUrl} target="_blank" rel="noopener">{p.buttonLabel}</a>
+          )}
+          <button class="btn btn--ghost" data-close>닫기</button>
+        </div>
+        {p.dismissForToday && (
+          <label class="popup__today"><input type="checkbox" data-today /> 오늘 하루 보지 않기</label>
+        )}
+      </div>
+    </div>
+  </div>
+)}
+
+<style>
+  .popup { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; padding: 1.2rem; }
+  .popup[hidden] { display: none; }
+  .popup__overlay { position: absolute; inset: 0; background: rgba(19,29,49,.6); }
+  .popup__card { position: relative; z-index: 1; background: var(--panel); border-radius: 14px; max-width: 26rem; width: 100%; overflow: hidden auto; max-height: 90vh; box-shadow: 0 20px 60px rgba(0,0,0,.35); }
+  .popup__x { position: absolute; top: .5rem; right: .6rem; z-index: 2; background: rgba(0,0,0,.35); color: #fff; border: 0; width: 2rem; height: 2rem; border-radius: 50%; font-size: 1.3rem; line-height: 1; cursor: pointer; }
+  .popup__img { width: 100%; display: block; }
+  .popup__body { padding: 1.5rem; }
+  .popup__title { margin: 0 0 .6rem; }
+  .popup__text { color: var(--muted); white-space: pre-line; margin: 0 0 1.2rem; }
+  .popup__actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+  .popup__today { display: flex; align-items: center; gap: .4rem; color: var(--muted); font-size: .85rem; margin-top: 1rem; cursor: pointer; }
+</style>
+
+<script>
+  (function () {
+    var root = document.querySelector('[data-popup]');
+    if (!root) return;
+    var sig = root.getAttribute('data-sig') || '';
+    var today = new Date().toISOString().slice(0, 10);
+    try {
+      if (sessionStorage.getItem('sjPopupClosed') === sig) return;
+      var t = JSON.parse(localStorage.getItem('sjPopupToday') || 'null');
+      if (t && t.sig === sig && t.date === today) return;
+    } catch (e) {}
+    root.hidden = false;
+    var todayCb = root.querySelector('[data-today]');
+    function close() {
+      try {
+        if (todayCb && todayCb.checked) {
+          localStorage.setItem('sjPopupToday', JSON.stringify({ sig: sig, date: today }));
+        } else {
+          sessionStorage.setItem('sjPopupClosed', sig);
+        }
+      } catch (e) {}
+      root.hidden = true;
+    }
+    root.querySelectorAll('[data-close]').forEach(function (el) { el.addEventListener('click', close); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !root.hidden) close(); });
+  })();
+</script>

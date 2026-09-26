@@ -134,3 +134,19 @@ collections:
           - { name: instagramUrl, label: 인스타그램 주소, widget: string, required: false }
           - { name: contactEmail, label: 이메일, widget: string, required: false }
           - { name: phone, label: 전화번호, widget: string, required: false }
+
+  # ---------- 팝업 공지 ----------
+  - name: popup
+    label: 팝업 공지
+    files:
+      - name: popup
+        label: 팝업 공지
+        file: src/data/popup.json
+        fields:
+          - { name: enabled, label: 팝업 켜기, widget: boolean, default: false }
+          - { name: title, label: 제목, widget: string, required: false }
+          - { name: body, label: 내용, widget: text, required: false }
+          - { name: image, label: 포스터 이미지, widget: image, required: false }
+          - { name: buttonLabel, label: 버튼 문구, widget: string, required: false }
+          - { name: buttonUrl, label: 버튼 링크, widget: string, required: false, hint: "예: /worship 또는 https://..." }
+          - { name: dismissForToday, label: "'오늘 하루 보지 않기' 표시", widget: boolean, default: true }

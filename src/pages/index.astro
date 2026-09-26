@@ -20,7 +20,7 @@ const cards = [
     <div class="hero-text">
       <p class="hero-eyebrow">{settings.tagline}</p>
       <h1>{settings.churchName}</h1>
-      <p class="hero-verse">“오라 우리가 여호와께 노래하며 우리의 구원의 반석을 향하여 즐거이 외치자” — 시편 95:1</p>
+      <p class="hero-verse">“오라 우리가 여호와께 노래하며 우리의 구원의 반석을 향하여 즐거이 외치자”<span class="hero-cite">— 시편 95:1</span></p>
       <p class="hero-when">{settings.worshipTime}에 함께 예배드립니다 · 고양시 일산동구</p>
       <div class="hero-cta">
         <a class="btn btn--gold" href="/worship">예배 안내</a>
@@ -67,6 +67,7 @@ const cards = [
   .hero-eyebrow { font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-soft); font-weight: 700; margin: 0 0 .6rem; }
   .hero-text h1 { color: #fff; font-size: clamp(2.2rem, 5vw, 3.2rem); margin: 0 0 1rem; }
   .hero-verse { font-family: var(--serif); font-size: 1.1rem; color: rgba(255,255,255,.9); margin: 0 0 .8rem; }
+  .hero-cite { display: block; margin-top: .35rem; font-size: .95rem; color: rgba(255,255,255,.7); }
   .hero-when { color: rgba(255,255,255,.8); margin: 0 0 1.5rem; }
   .hero-cta { display: flex; flex-wrap: wrap; gap: .7rem; }
 </style>

@@ -1,6 +1,6 @@
 ---
 import { youtubeId } from '../utils/youtube';
-interface Props { title: string; date: Date; scripture?: string; preacher?: string; youtube?: string; summary?: string; href: string; }
+interface Props { title: string; date: Date; series?: string; scripture?: string; preacher?: string; youtube?: string; summary?: string; href: string; }
 const { title, date, scripture, preacher, youtube, summary, href } = Astro.props;
 const id = youtubeId(youtube);
 const thumb = id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : null;
@@ -10,7 +10,8 @@ const dateStr = date.toISOString().slice(0, 10);
   <a href={href}>
     <div class="thumb">{thumb ? <img src={thumb} alt="" loading="lazy" /> : <span>영상 준비 중</span>}</div>
     <div class="body">
-      <p class="meta">{dateStr}{scripture ? ` · ${scripture}` : ''}{preacher ? ` · ${preacher}` : ''}</p>
+      <p class="meta">{dateStr}{scripture ? ` · ${scripture}` : ''}</p>
+      {preacher && <p class="meta meta--preacher">{preacher}</p>}
       <h3>{title}</h3>
       {summary && <p class="summary">{summary}</p>}
     </div>
@@ -23,6 +24,8 @@ const dateStr = date.toISOString().slice(0, 10);
   .thumb { aspect-ratio: 16/9; background: radial-gradient(120% 120% at 30% 20%, #23324f, #131d31); display: grid; place-items: center; color: #9fb0cc; font-size: .85rem; }
   .thumb img { width: 100%; height: 100%; object-fit: cover; }
   .body { padding: 1rem 1.2rem 1.2rem; }
-  .body h3 { margin: .15rem 0 .3rem; }
+  .body .meta { margin: 0; }
+  .meta--preacher { margin: .15rem 0 0; }
+  .body h3 { margin: .35rem 0 .3rem; }
   .summary { color: var(--muted); font-size: .95rem; margin: 0; }
 </style>

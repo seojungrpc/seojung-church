@@ -6,6 +6,7 @@ const sermons = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.date(),
+    series: z.string().optional(),      // 설교 시리즈 (예: 누가복음 강해)
     scripture: z.string().optional(),   // 본문 성경
     preacher: z.string().optional(),    // 설교자
     youtube: z.string().optional(),     // 유튜브 링크

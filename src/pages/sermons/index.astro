@@ -6,24 +6,71 @@ import Gallery from '../../components/Gallery.astro';
 import SermonCard from '../../components/SermonCard.astro';
 import { pageImages } from '../../utils/images';
 const { hero, gallery } = pageImages('sermons');
-const sermons = (await getCollection('sermons', ({ data }) => !data.draft))
+
+const all = (await getCollection('sermons', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// 시리즈(강해)별로 묶기
+const NONE = '__none__';
+const map = new Map<string, typeof all>();
+for (const s of all) {
+  const key = (s.data.series || '').trim() || NONE;
+  if (!map.has(key)) map.set(key, []);
+  map.get(key)!.push(s);
+}
+// 최근 설교가 있는 시리즈부터, '그 외'는 맨 뒤
+const groups = [...map.entries()]
+  .map(([key, items]) => ({ key, items, latest: items[0].data.date.valueOf() }))
+  .sort((a, b) => {
+    if (a.key === NONE) return 1;
+    if (b.key === NONE) return -1;
+    return b.latest - a.latest;
+  });
+const grouped = groups.some((g) => g.key !== NONE);
 ---
 <BaseLayout title="설교">
   <PageHero image={hero} alt="설교" />
   <section class="section">
     <div class="container">
       <p class="eyebrow">설교</p>
-      <h1 style="margin-bottom:1.4rem">설교 말씀</h1>
-      {sermons.length ? (
+      <h1 style="margin-bottom:1.6rem">설교 말씀</h1>
+
+      {all.length === 0 && <p class="lede">등록된 설교가 아직 없습니다.</p>}
+
+      {grouped ? (
+        groups.map((g) => (
+          <div class="series">
+            <div class="series__head">
+              <h2>{g.key === NONE ? '그 외 설교' : g.key}</h2>
+              <span class="series__count">{g.items.length}편</span>
+            </div>
+            <div class="grid-3">
+              {g.items.map((s) => (
+                <SermonCard title={s.data.title} date={s.data.date} series={s.data.series}
+                  scripture={s.data.scripture} preacher={s.data.preacher}
+                  youtube={s.data.youtube} summary={s.data.summary} href={`/sermons/${s.slug}`} />
+              ))}
+            </div>
+          </div>
+        ))
+      ) : (
         <div class="grid-3">
-          {sermons.map((s) => (
-            <SermonCard title={s.data.title} date={s.data.date} scripture={s.data.scripture}
-              preacher={s.data.preacher} youtube={s.data.youtube} summary={s.data.summary} href={`/sermons/${s.slug}`} />
+          {all.map((s) => (
+            <SermonCard title={s.data.title} date={s.data.date} series={s.data.series}
+              scripture={s.data.scripture} preacher={s.data.preacher}
+              youtube={s.data.youtube} summary={s.data.summary} href={`/sermons/${s.slug}`} />
           ))}
         </div>
-      ) : <p class="lede">등록된 설교가 아직 없습니다.</p>}
+      )}
     </div>
   </section>
   <Gallery images={gallery} />
 </BaseLayout>
+
+<style>
+  .series { margin-bottom: 2.8rem; }
+  .series:last-child { margin-bottom: 0; }
+  .series__head { display: flex; align-items: baseline; gap: .8rem; margin: 0 0 1.1rem; padding-bottom: .5rem; border-bottom: 2px solid var(--gold); }
+  .series__head h2 { margin: 0; }
+  .series__count { color: var(--muted); font-size: .9rem; }
+</style>

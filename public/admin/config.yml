@@ -20,9 +20,16 @@ collections:
     folder: src/content/sermons
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{fields.date | date('YYYY-MM-DD')}} · {{fields.title}}"
+    sortable_fields: [date, title, series]
+    view_groups:
+      - { label: 시리즈별, field: series }
+    view_filters:
+      - { label: 비공개만, field: draft, pattern: true }
     fields:
       - { name: title, label: 제목, widget: string }
       - { name: date, label: 날짜, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { name: series, label: 시리즈(강해), widget: string, required: false, hint: "같은 강해끼리 정확히 같은 이름으로. 예: 누가복음 강해 / 사도행전 강해" }
       - { name: scripture, label: 본문 성경, widget: string, required: false }
       - { name: preacher, label: 설교자, widget: string, required: false, default: "서학량 목사" }
       - { name: youtube, label: 유튜브 링크, widget: string, required: false, hint: "유튜브 영상 주소 전체를 붙여넣으세요" }
@@ -37,6 +44,8 @@ collections:
     folder: src/content/news
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{fields.date | date('YYYY-MM-DD')}} · {{fields.title}}"
+    sortable_fields: [date, title]
     fields:
       - { name: title, label: 제목, widget: string }
       - { name: date, label: 날짜, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }

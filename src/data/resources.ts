@@ -15,7 +15,7 @@ export const resourceGroups: ResourceGroup[] = [
   {
     title: '개혁장로교회 (RP) 세계 교단',
     links: [
-      { name: 'RPCNA · 북미', url: 'https://www.reformedpresbyterian.org/' },
+      { name: 'RPCNA · 북미', url: 'https://reformedpresbyterian.org/' },
       { name: 'RP Church of Canada · 캐나다', url: 'https://rpccanada.org/' },
       { name: 'RP Church of Ireland · 아일랜드', url: 'https://www.rpc.org/' },
       { name: 'RP Church of Scotland · 스코틀랜드', url: 'https://www.rpcscotland.org/' },

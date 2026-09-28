@@ -46,16 +46,22 @@ const { hero, gallery } = pageImages('resources');
 </BaseLayout>
 <style>
   .more-wrap { margin-top: 1.6rem; }
+  /* 3열 배치. 각 묶음은 열을 넘어 쪼개지지 않음(break-inside: avoid) */
   .res {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-    gap: 1.6rem 2rem;
-    align-items: start;
+    column-count: 3;
+    column-gap: 2.4rem;
     margin-top: 1.8rem;
   }
-  .res-group { min-width: 0; }
+  .res-group {
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 2rem;
+  }
   .res-group h3 { font-family: var(--serif); padding-bottom: .5rem; border-bottom: 2px solid var(--gold); margin-bottom: .6rem; }
   .res-item { padding: .38rem 0; }
   .res-item a { font-weight: 500; }
   .rd { display: block; color: var(--muted); font-size: .82rem; margin-top: .1rem; }
+  @media (max-width: 860px) { .res { column-count: 2; } }
+  @media (max-width: 560px) { .res { column-count: 1; } }
 </style>

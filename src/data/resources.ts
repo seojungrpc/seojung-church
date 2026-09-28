@@ -32,17 +32,17 @@ export const resourceGroups: ResourceGroup[] = [
     ],
   },
   {
-    title: '선교',
-    links: [
-      { name: 'RP Global Missions', url: 'https://www.rpglobalmissions.org/' },
-      { name: 'RP Short Term Missions', url: 'https://rpmissions.org/' },
-    ],
-  },
-  {
     title: '예배 · 출판',
     links: [
       { name: 'Crown & Covenant Publications', url: 'https://crownandcovenant.com/', desc: 'RP 교단 출판사' },
       { name: 'The Book of Psalms for Worship', url: 'https://crownandcovenant.com/collections/the-book-of-psalms-for-worship', desc: '공예배용 시편찬송집' },
+    ],
+  },
+  {
+    title: '선교',
+    links: [
+      { name: 'RP Global Missions', url: 'https://www.rpglobalmissions.org/' },
+      { name: 'RP Short Term Missions', url: 'https://rpmissions.org/' },
     ],
   },
 ];

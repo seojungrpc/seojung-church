@@ -1,9 +1,9 @@
 {
   "enabled": true,
-  "title": "테스트",
-  "body": "테스트",
-  "image": "/images/blue_banner_copy_2.jpg",
-  "buttonLabel": "테스트",
-  "buttonUrl": "https://seojungrpc.com/news/2025-01-01-welcome/",
+  "title": "초청설교",
+  "body": "RPCNA 북미개혁장로교회 - Stillwater RPC 브루스 파넬 목사님",
+  "image": "/images/포스터.png",
+  "buttonLabel": "",
+  "buttonUrl": "",
   "dismissForToday": true
 }

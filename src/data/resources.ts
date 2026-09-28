@@ -28,7 +28,7 @@ export const resourceGroups: ResourceGroup[] = [
     links: [
       { name: 'RPTS · 미국', url: 'https://www.rpts.edu/', desc: '개혁장로교 신학교' },
       { name: 'Reformed Theological College · 아일랜드 벨파스트', url: 'https://www.rpc.org/theological-college/' },
-      { name: '神戸改革派神学校 · 일본 고베', url: 'https://www.krts.net/', desc: '고베 개혁파 신학교' },
+      { name: '神戸神学館 (Kobe Theological Hall) · 일본 고베', url: 'https://church.ne.jp/kth/', desc: 'RPCNA 일본 노회 신학교' },
     ],
   },
   {

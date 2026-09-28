@@ -13,11 +13,18 @@ export interface ResourceGroup {
 // RP 계열 및 참고 사이트 모음. 자유롭게 추가/수정하세요.
 export const resourceGroups: ResourceGroup[] = [
   {
-    title: '교단 · 기관',
+    title: '개혁장로교회 (RP) 세계 교단',
     links: [
-      { name: 'RPCNA (북미개혁장로교단)', url: 'https://www.reformedpresbyterian.org/', desc: '우리가 속한 교단' },
+      { name: 'RPCNA (북미)', url: 'https://www.reformedpresbyterian.org/', desc: 'Reformed Presbyterian Church of North America' },
+      { name: 'RP Church of Canada (캐나다)', url: 'https://rpccanada.org/', desc: 'Reformed Presbyterian Church of Canada' },
+      { name: 'RP Church of Ireland (아일랜드)', url: 'https://www.rpc.org/', desc: 'Reformed Presbyterian Church of Ireland' },
+      { name: 'RP Church of Scotland (스코틀랜드)', url: 'https://www.rpcscotland.org/', desc: 'Reformed Presbyterian Church of Scotland' },
+    ],
+  },
+  {
+    title: '기관 · 신학교',
+    links: [
       { name: 'RPTS (개혁장로교 신학교)', url: 'https://www.rpts.edu/' },
-      { name: 'Geneva College', url: 'https://www.geneva.edu/' },
       { name: 'RP Home', url: 'https://rphome.org/' },
     ],
   },

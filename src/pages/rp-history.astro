@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import RpHistory from '../components/RpHistory.astro';
+import { pageImages } from '../utils/images';
+const { hero } = pageImages('resources');
+---
+<BaseLayout title="개혁장로교회의 역사와 신앙">
+  <PageHero image={hero} alt="개혁장로교회" />
+  <section class="section">
+    <div class="container prose">
+      <p class="eyebrow">개혁장로교회</p>
+      <h1>개혁장로교회의 역사와 신앙</h1>
+      <RpHistory />
+      <p style="margin-top:2.4rem">
+        <a class="btn" href="/resources">← 자료·참고 사이트로</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

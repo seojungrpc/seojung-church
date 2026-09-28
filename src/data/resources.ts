@@ -10,22 +10,25 @@ export interface ResourceGroup {
   links: ResourceLink[];
 }
 
-// RP 계열 및 참고 사이트 모음. 자유롭게 추가/수정하세요.
+// RP 계열 참고 사이트 모음. 자유롭게 추가/수정하세요.
 export const resourceGroups: ResourceGroup[] = [
   {
     title: '개혁장로교회 (RP) 세계 교단',
     links: [
-      { name: 'RPCNA (북미)', url: 'https://www.reformedpresbyterian.org/', desc: 'Reformed Presbyterian Church of North America' },
-      { name: 'RP Church of Canada (캐나다)', url: 'https://rpccanada.org/', desc: 'Reformed Presbyterian Church of Canada' },
-      { name: 'RP Church of Ireland (아일랜드)', url: 'https://www.rpc.org/', desc: 'Reformed Presbyterian Church of Ireland' },
-      { name: 'RP Church of Scotland (스코틀랜드)', url: 'https://www.rpcscotland.org/', desc: 'Reformed Presbyterian Church of Scotland' },
+      { name: 'RPCNA · 북미', url: 'https://www.reformedpresbyterian.org/' },
+      { name: 'RP Church of Canada · 캐나다', url: 'https://rpccanada.org/' },
+      { name: 'RP Church of Ireland · 아일랜드', url: 'https://www.rpc.org/' },
+      { name: 'RP Church of Scotland · 스코틀랜드', url: 'https://www.rpcscotland.org/' },
+      { name: 'RP Church of Australia · 호주', url: 'https://rpca.org.au/' },
+      { name: 'RPCNA 일본 노회 · 일본', url: 'https://rpjapan.org/' },
     ],
   },
   {
-    title: '기관 · 신학교',
+    title: '신학교',
     links: [
-      { name: 'RPTS (개혁장로교 신학교)', url: 'https://www.rpts.edu/' },
-      { name: 'RP Home', url: 'https://rphome.org/' },
+      { name: 'RPTS · 미국', url: 'https://www.rpts.edu/', desc: '개혁장로교 신학교' },
+      { name: 'Reformed Theological College · 아일랜드 벨파스트', url: 'https://www.rpc.org/theological-college/' },
+      { name: '神戸改革派神学校 · 일본 고베', url: 'https://www.krts.net/', desc: '고베 개혁파 신학교' },
     ],
   },
   {
@@ -41,17 +44,5 @@ export const resourceGroups: ResourceGroup[] = [
       { name: 'Crown & Covenant Publications', url: 'https://crownandcovenant.com/', desc: 'RP 교단 출판사' },
       { name: 'The Book of Psalms for Worship', url: 'https://crownandcovenant.com/collections/the-book-of-psalms-for-worship', desc: '공예배용 시편찬송집' },
     ],
-  },
-  {
-    title: '참고 교회 (레퍼런스)',
-    links: [
-      { name: 'Providence RPC', url: 'https://www.providencerpchurch.com/' },
-      { name: 'Las Vegas RPC', url: 'https://lvrpcna.com/' },
-    ],
-  },
-  {
-    title: '국내 개혁·장로 자료',
-    note: '국내 관련 링크는 확정되는 대로 채워 넣으세요.',
-    links: [],
   },
 ];

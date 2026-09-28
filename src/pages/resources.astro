@@ -2,47 +2,28 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import Gallery from '../components/Gallery.astro';
+import RpHistory from '../components/RpHistory.astro';
 import { pageImages } from '../utils/images';
 import { resourceGroups } from '../data/resources';
 const { hero, gallery } = pageImages('resources');
 ---
-<BaseLayout title="개혁장로교회">
+<BaseLayout title="개혁장로교회 · 자료">
   <PageHero image={hero} alt="개혁장로교회" />
 
   <section class="section">
     <div class="container prose">
       <p class="eyebrow">개혁장로교회</p>
       <h1>개혁장로교회의 역사와 신앙</h1>
-
-      <h2>개혁장로교회란?</h2>
-      <p>개혁장로교회(Reformed Presbyterian Church)는 16–17세기 스코틀랜드 종교개혁과 언약도(Covenanters)의 신앙적 유산을 이어가는 장로교회입니다.</p>
-      <p>‘개혁(Reformed)’이라는 이름은 교회의 신앙과 삶을 언제나 하나님의 말씀에 따라 개혁하고자 했던 종교개혁의 원리를 나타내며, ‘장로교(Presbyterian)’라는 이름은 성경이 가르치는 대로 장로들의 치리와 돌봄을 통해 교회를 세워 가는 교회정치를 뜻합니다.</p>
-      <p>역사적으로 개혁장로교인들은 ‘언약도(Covenanters)’라고도 불렸습니다. 이들은 교회의 궁극적인 권위가 국가나 인간에게 있지 않고 오직 예수 그리스도께 있음을 고백했으며, 그리스도께서 교회의 유일한 왕이시며 머리이심을 지키고자 했습니다.</p>
-
-      <h2>스코틀랜드 종교개혁과 언약도</h2>
-      <p>스코틀랜드에서는 존 낙스를 비롯한 종교개혁자들의 사역을 통해 1560년 종교개혁이 이루어졌고, 교회는 성경에 기초한 개혁신학과 장로교회 정치를 확립해 나갔습니다.</p>
-      <p>그러나 17세기에 들어 왕실이 스코틀랜드 교회에 감독제와 왕의 종교적 권위를 강요하면서 큰 갈등이 일어났습니다. 이에 스코틀랜드의 신자들은 1638년 국가언약(National Covenant)과 1643년 엄숙동맹 및 언약(Solemn League and Covenant)을 통해 종교개혁의 원칙을 지키고, 교회에 대한 예수 그리스도의 통치권을 공적으로 고백하고자 했습니다.</p>
-      <p>이 시기에 열린 웨스트민스터 총회는 『웨스트민스터 신앙고백』, 『대요리문답』과 『소요리문답』, 『공예배 모범』, 『장로교회 정치 형태』 등을 작성했습니다. 이 문서들은 이후 개혁장로교회의 교리와 예배와 정치에 중요한 표준이 되었습니다.</p>
-
-      <h2>박해와 혁명 정착</h2>
-      <p>1660년 왕정복고 이후 스코틀랜드에서는 장로교 목회자들과 언약도들에 대한 심한 박해가 이어졌습니다. 많은 신자들은 들판과 산지에서 예배를 이어가면서, 어떤 국가 권력도 교회의 머리가 될 수 없으며 오직 예수 그리스도만이 교회의 왕이시며 머리이심을 고백했습니다.</p>
-      <p>1688년 명예혁명 이후 박해는 끝나고, 1690년 스코틀랜드에는 장로교회가 다시 공인되었습니다. 그러나 모든 언약도가 이른바 ‘혁명정착(Revolution Settlement)’에 참여한 것은 아니었습니다.</p>
-      <p>일부 언약도들은 새로 마련된 교회 체제가 이전 종교개혁의 원칙과 언약적 책임을 충분히 회복하지 못했으며, 특히 교회에 대한 그리스도의 통치권과 교회의 영적 독립을 온전히 보존하지 못한다고 판단했습니다. 이들은 새 체제에 참여하지 않고 여러 지역에서 작은 신앙 공동체(Societies)를 이루어 예배와 교제를 이어갔습니다.</p>
-      <p>이 공동체들은 오랜 기다림 끝에 목회자들과 장로들을 중심으로 1743년 개혁장로회(Reformed Presbytery)를 조직했습니다. 오늘날 개혁장로교회는 이러한 스코틀랜드 언약도들의 신앙과 증언 속에서 자신의 직접적인 역사적 뿌리를 찾고 있습니다.</p>
-
-      <h2>오늘날의 개혁장로교회</h2>
-      <p>개혁장로교회의 역사는 단순히 과거의 정치적·교회적 갈등을 기억하기 위한 역사가 아닙니다. 그 역사의 중심에는 “교회의 왕은 누구인가?”, “교회의 신앙과 예배와 정치는 무엇에 의해 결정되어야 하는가?”라는 질문이 있었습니다.</p>
-      <p>이러한 역사 속에서 개혁장로교회는 성경을 신앙과 삶의 최종적인 권위로 고백하고, 예수 그리스도께서 교회의 유일한 왕이시며 머리이심을 고백해 왔습니다. 또한 장로에 의한 성경적 교회정치, 국가 권력으로부터 구별되는 교회의 영적 통치권, 웨스트민스터 신앙고백과 대·소요리문답의 개혁신앙, 그리고 하나님의 말씀에 따라 드리는 예배를 소중히 여겨 왔습니다.</p>
-      <p>오늘날 북미, 스코틀랜드, 아일랜드, 캐나다를 비롯한 여러 지역의 개혁장로교회들은 서로 다른 역사와 환경 속에서도 이러한 신앙의 유산을 공유하고 있습니다.</p>
-      <p>서정교회 역시 단지 오래된 전통이기 때문에 이 신앙을 따르고자 하는 것이 아닙니다. 우리는 이 신앙과 실천이 성경의 가르침을 충실하게 드러낸다고 믿기에, 역사적 개혁장로교회의 유산을 배우고 오늘의 교회 가운데 고백하고 실천하고자 합니다.</p>
+      <RpHistory intro={true} />
+      <p class="more-wrap"><a class="btn btn--gold" href="/rp-history">더보기 →</a></p>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
       <p class="eyebrow">참고 자료</p>
-      <h2>RP 계열 참고 자료</h2>
-      <p class="lede">개혁장로교회와 관련된 교단·기관·예배 자료 링크입니다.</p>
+      <h2>RP 계열 참고 사이트</h2>
+      <p class="lede">개혁장로교회와 관련된 교단·신학교·예배 자료 링크입니다.</p>
       <div class="res">
         {resourceGroups.map((g) => (
           <section class="res-group">
@@ -51,7 +32,7 @@ const { hero, gallery } = pageImages('resources');
             {g.links.length > 0 && (
               <ul class="list-reset">
                 {g.links.map((l) => (
-                  <li style="padding:.32rem 0"><a href={l.url} target="_blank" rel="noopener">{l.name}</a>{l.desc && <span class="rd"> — {l.desc}</span>}</li>
+                  <li class="res-item"><a href={l.url} target="_blank" rel="noopener">{l.name}</a>{l.desc && <span class="rd">{l.desc}</span>}</li>
                 ))}
               </ul>
             )}
@@ -64,7 +45,17 @@ const { hero, gallery } = pageImages('resources');
   <Gallery images={gallery} />
 </BaseLayout>
 <style>
-  .res { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 2rem; margin-top: 1.8rem; }
-  .res-group h3 { font-family: var(--serif); }
-  .rd { color: var(--muted); font-size: .85rem; }
+  .more-wrap { margin-top: 1.6rem; }
+  .res {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 1.6rem 2rem;
+    align-items: start;
+    margin-top: 1.8rem;
+  }
+  .res-group { min-width: 0; }
+  .res-group h3 { font-family: var(--serif); padding-bottom: .5rem; border-bottom: 2px solid var(--gold); margin-bottom: .6rem; }
+  .res-item { padding: .38rem 0; }
+  .res-item a { font-weight: 500; }
+  .rd { display: block; color: var(--muted); font-size: .82rem; margin-top: .1rem; }
 </style>

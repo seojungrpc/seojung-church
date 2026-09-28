@@ -49,6 +49,19 @@ const cards = [
 
   <section class="section">
     <div class="container">
+      <a class="rp-callout" href="/rp-history">
+        <div>
+          <p class="rp-callout__eyebrow">개혁장로교회</p>
+          <h2 class="rp-callout__title">개혁장로교회의 역사와 신앙</h2>
+          <p class="rp-callout__body">스코틀랜드 언약도에서 오늘에 이르기까지, 우리가 잇는 신앙의 유산을 소개합니다.</p>
+        </div>
+        <span class="rp-callout__cta">자세히 보기 →</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
       <div class="head-row"><h2>최근 설교</h2><a href="/sermons">전체 보기 →</a></div>
       {sermons.length ? (
         <div class="grid-3">
@@ -67,6 +80,13 @@ const cards = [
   .hero-eyebrow { font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-soft); font-weight: 700; margin: 0 0 .6rem; }
   .hero-text h1 { color: #fff; font-size: clamp(2.2rem, 5vw, 3.2rem); margin: 0 0 1rem; }
   .hero-verse { font-family: var(--serif); font-size: 1.1rem; color: rgba(255,255,255,.9); margin: 0 0 .8rem; }
+  .rp-callout { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;
+    background: var(--ink); color: #fff; border-radius: 12px; padding: 1.8rem 2rem; }
+  .rp-callout:hover { text-decoration: none; background: var(--ink-soft); }
+  .rp-callout__eyebrow { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-soft); font-weight: 700; margin: 0 0 .4rem; }
+  .rp-callout__title { color: #fff; margin: 0 0 .4rem; }
+  .rp-callout__body { color: rgba(255,255,255,.82); margin: 0; max-width: 40rem; }
+  .rp-callout__cta { color: var(--gold-soft); font-weight: 700; white-space: nowrap; }
   .hero-cite { display: block; margin-top: .35rem; font-size: .95rem; color: rgba(255,255,255,.7); }
   .hero-when { color: rgba(255,255,255,.8); margin: 0 0 1.5rem; }
   .hero-cta { display: flex; flex-wrap: wrap; gap: .7rem; }

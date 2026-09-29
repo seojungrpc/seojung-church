@@ -4,7 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import Gallery from '../components/Gallery.astro';
 import RpHistory from '../components/RpHistory.astro';
 import { pageImages } from '../utils/images';
-import { resourceGroups } from '../data/resources';
+import { resourceGroups, books } from '../data/resources';
 const { hero, gallery } = pageImages('resources');
 ---
 <BaseLayout title="개혁장로교회 · 자료">
@@ -19,26 +19,27 @@ const { hero, gallery } = pageImages('resources');
     </div>
   </section>
 
+  {resourceGroups.map((g) => (
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">교단</p>
+        <h2>{g.title}</h2>
+        <ul class="denoms list-reset">
+          {g.links.map((l) => (
+            <li class="denom"><a href={l.url} target="_blank" rel="noopener">{l.name}</a></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  ))}
+
   <section class="section">
     <div class="container">
-      <p class="eyebrow">참고 자료</p>
-      <h2>RP 계열 참고 사이트</h2>
-      <p class="lede">개혁장로교회와 관련된 교단·신학교·예배 자료 링크입니다.</p>
-      <div class="res">
-        {resourceGroups.map((g) => (
-          <section class="res-group">
-            <h3>{g.title}</h3>
-            {g.note && <p class="meta">{g.note}</p>}
-            {g.links.length > 0 && (
-              <ul class="list-reset">
-                {g.links.map((l) => (
-                  <li class="res-item"><a href={l.url} target="_blank" rel="noopener">{l.name}</a>{l.desc && <span class="rd">{l.desc}</span>}</li>
-                ))}
-              </ul>
-            )}
-          </section>
-        ))}
-      </div>
+      <p class="eyebrow">참고 서적</p>
+      <h2>참고 서적</h2>
+      <ul class="books list-reset">
+        {books.map((b) => <li class="book" set:html={b} />)}
+      </ul>
     </div>
   </section>
 
@@ -46,22 +47,27 @@ const { hero, gallery } = pageImages('resources');
 </BaseLayout>
 <style>
   .more-wrap { margin-top: 1.6rem; }
-  /* 3열 배치. 각 묶음은 열을 넘어 쪼개지지 않음(break-inside: avoid) */
-  .res {
-    column-count: 3;
-    column-gap: 2.4rem;
-    margin-top: 1.8rem;
+
+  /* 교단 홈페이지 — 링크가 폭을 고르게 채우도록 */
+  .denoms {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: .3rem 2rem;
+    margin-top: 1.1rem;
   }
-  .res-group {
-    break-inside: avoid;
-    -webkit-column-break-inside: avoid;
-    page-break-inside: avoid;
-    margin-bottom: 2rem;
+  .denom { padding: .45rem 0; }
+  .denom a { font-weight: 500; }
+
+  /* 참고 서적 — 서지 목록 */
+  .books { max-width: 54rem; margin-top: 1.1rem; }
+  .book {
+    font-family: var(--serif);
+    color: var(--ink-soft);
+    line-height: 1.65;
+    padding: .6rem 0 .6rem 1.4rem;
+    text-indent: -1.4rem;
+    border-top: 1px solid var(--line);
   }
-  .res-group h3 { font-family: var(--serif); padding-bottom: .5rem; border-bottom: 2px solid var(--gold); margin-bottom: .6rem; }
-  .res-item { padding: .38rem 0; }
-  .res-item a { font-weight: 500; }
-  .rd { display: block; color: var(--muted); font-size: .82rem; margin-top: .1rem; }
-  @media (max-width: 860px) { .res { column-count: 2; } }
-  @media (max-width: 560px) { .res { column-count: 1; } }
+  .book:first-child { border-top: 0; }
+  .book :global(em) { font-style: italic; }
 </style>

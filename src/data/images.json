@@ -1,12 +1,39 @@
 {
-  "homeSlides": [],
+  "homeSlides": [
+    {
+      "image": "/images/DSC03289.jpg",
+      "alt": "",
+      "caption": ""
+    }
+  ],
   "pages": {
-    "about":     { "hero": "", "gallery": [] },
-    "beliefs":   { "hero": "", "gallery": [] },
-    "worship":   { "hero": "", "gallery": [] },
-    "sermons":   { "hero": "", "gallery": [] },
-    "news":      { "hero": "", "gallery": [] },
-    "resources": { "hero": "", "gallery": [] },
-    "visit":     { "hero": "", "gallery": [] }
+    "about": {
+      "hero": "",
+      "gallery": []
+    },
+    "beliefs": {
+      "hero": "",
+      "gallery": []
+    },
+    "worship": {
+      "hero": "",
+      "gallery": []
+    },
+    "sermons": {
+      "hero": "",
+      "gallery": []
+    },
+    "news": {
+      "hero": "",
+      "gallery": []
+    },
+    "resources": {
+      "hero": "",
+      "gallery": []
+    },
+    "visit": {
+      "hero": "",
+      "gallery": []
+    }
   }
 }

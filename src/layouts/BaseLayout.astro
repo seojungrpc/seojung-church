@@ -7,11 +7,37 @@ import '../styles/global.css';
 
 interface Props { title?: string; description?: string; }
 const { title, description } = Astro.props;
-const pageTitle = title ? `${title} · ${settings.churchName}` : `${settings.churchName} · ${settings.tagline}`;
-const desc = description ?? settings.tagline;
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
+// 홈 제목에 지역명을 넣어 동명 교회와 구별
+const pageTitle = title
+  ? `${title} · ${settings.churchName}`
+  : `${settings.churchName} | 서울 가산디지털단지 개혁장로교회 (RP)`;
+const desc = description ?? (isHome
+  ? '서울 금천구 가산디지털단지의 개혁장로교회 개척 모임 서정교회입니다. RPCNA와 뜻을 같이하는 개혁파 신앙 위에서, 주일 오전 11시에 성경에 근거한 예배와 시편찬송으로 함께 예배드립니다.'
+  : settings.tagline);
 const siteBase = Astro.site ?? new URL('https://seojungrpc.com');
 const ogImage = new URL('/og.jpg', siteBase).href;
 const canonical = new URL(Astro.url.pathname, siteBase).href;
+
+// 검색엔진용 구조화 데이터 (교회 정체성·주소). 장소 이전 시 여기 주소도 함께 수정
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Church',
+  name: settings.churchName,
+  alternateName: '서정교회 (서울 가산 개혁장로교회)',
+  url: siteBase.href,
+  logo: ogImage,
+  image: ogImage,
+  description: '서울 금천구 가산디지털단지의 개혁장로교회 개척 모임',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '가산디지털1로 222 104호',
+    addressLocality: '금천구',
+    addressRegion: '서울특별시',
+    addressCountry: 'KR',
+  },
+  sameAs: [settings.youtubeChannelUrl, settings.instagramUrl].filter(Boolean),
+};
 ---
 <!doctype html>
 <html lang="ko">
@@ -33,6 +59,7 @@ const canonical = new URL(Astro.url.pathname, siteBase).href;
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={desc} />
     <meta name="twitter:image" content={ogImage} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

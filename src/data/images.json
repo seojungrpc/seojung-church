@@ -1,5 +1,11 @@
 {
-  "homeSlides": [],
+  "homeSlides": [
+    {
+      "image": "/images/대문 슬라이드.jpg",
+      "alt": "",
+      "caption": ""
+    }
+  ],
   "pages": {
     "about": {
       "hero": "",

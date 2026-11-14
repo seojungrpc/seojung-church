@@ -1,11 +1,5 @@
 {
-  "homeSlides": [
-    {
-      "image": "/images/DSC03289.jpg",
-      "alt": "",
-      "caption": ""
-    }
-  ],
+  "homeSlides": [],
   "pages": {
     "about": {
       "hero": "",
